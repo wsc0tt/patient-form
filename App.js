@@ -1,8 +1,17 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  SafeAreaView, 
+  ScrollView, 
+  KeyboardAvoidingView, 
+  Platform } 
+  from "react-native";
 import Form from "./components/Form";
 import { useState } from "react";
 import SubmitButton from "./components/SubmitButton";
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
 
 export default function App() {
   const [inputs, setInputs] = useState({
@@ -33,8 +42,8 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView style={styles.app}>
-      <ScrollView style={styles.container}>
+      <KeyboardAwareScrollView>
+      <View style={styles.app}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Add New Patient</Text>
         </View>
@@ -47,8 +56,8 @@ export default function App() {
         <Form placeholder="MM" />
         <Form placeholder="DD" onChangeText={setInputs.day} />
         <SubmitButton onPress={handleSubmit} />
-      </ScrollView>
-    </SafeAreaView>
+        </View>
+      </KeyboardAwareScrollView>
   );
 }
 
@@ -56,6 +65,8 @@ const styles = StyleSheet.create({
   app: {
     flex: 1,
     backgroundColor: "#fff",
+    paddingTop: 40,
+    paddingHorizontal: 20,
   },
   headerText: {
     fontSize: 32,
