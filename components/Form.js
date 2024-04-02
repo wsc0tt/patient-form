@@ -15,9 +15,10 @@ const Form = ({ error, onFocus = () => {}, ...props }) => {
           setIsFocused(false);
         }}
         placeholder={props.placeholder}
-        onChangeText={props.onChangeText}
+        onChangeText={props.onChange}
         style={[styles.input, { borderColor: isFocused ? "blue" : "white" }]}
-        cursorColor="#ffffff00"
+        cursorColor="blue"
+        value={props.value}
       />
     </View>
   );
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     backgroundColor: "#eee",
-    paddingVertical: 13,
+    paddingVertical: 12,
     paddingLeft: 20,
     fontSize: 18,
     borderRadius: 30,

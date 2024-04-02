@@ -1,29 +1,30 @@
 import { StatusBar } from "expo-status-bar";
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
-  SafeAreaView, 
-  ScrollView, 
-  KeyboardAvoidingView, 
-  Platform } 
-  from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import Form from "./components/Form";
 import { useState } from "react";
 import SubmitButton from "./components/SubmitButton";
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import DropDownPicker from "react-native-dropdown-picker";
 
-export default function App() {
-  const [inputs, setInputs] = useState({
-    first: "",
-    middle: "",
-    last: "",
-    day: "",
-    year: "",
-    month: "",
-    /*bloodGroup: "",
-    rhFactor: "",
-    maritalStatus: "",
+const initialValues = {
+  first: "",
+  middle: "",
+  last: "",
+  day: "",
+  year: "",
+  month: "",
+  /*bloodGroup: "",
+  rhFactor: "",
+  maritalStatus: "",
     phoneHome: "",
     phoneMobile: "",
     emailAddress: "",
@@ -32,32 +33,64 @@ export default function App() {
     currentIllness: "",
     previousIllness: "",
     allergies: "",*/
-  });
+};
+
+export default function App() {
+  const [form, setForm] = useState(initialValues);
+
   const handleSubmit = () => {
-    console.log("High Energy Weapons");
+    Alert.alert(JSON.stringify(form));
+    console.log(form);
   };
 
-  const handleChange = (text, input) => {
-    setInputs((prevState) => ({ ...prevState, [input]: text }));
+  const handleInputChange = (name) => (value) => {
+    setForm({
+      ...form,
+      [name]: value,
+    });
   };
 
   return (
-      <KeyboardAwareScrollView>
+    <KeyboardAwareScrollView>
       <View style={styles.app}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Add New Patient</Text>
         </View>
         <Text style={styles.label}>Name</Text>
-        <Form placeholder="First" />
-        <Form placeholder="Middle" />
-        <Form placeholder="Last" />
+        <Form
+          placeholder="First"
+          value={form.first}
+          onChange={handleInputChange("first")}
+        />
+        <Form
+          placeholder="Middle"
+          value={form.middle}
+          onChange={handleInputChange("middle")}
+        />
+        <Form
+          placeholder="Last"
+          value={form.last}
+          onChange={handleInputChange("last")}
+        />
         <Text style={styles.label}>Date of Birth</Text>
-        <Form placeholder="YYYY" />
-        <Form placeholder="MM" />
-        <Form placeholder="DD" onChangeText={setInputs.day} />
+        <Form
+          placeholder="YYYY"
+          value={form.year}
+          onChange={handleInputChange("year")}
+        />
+        <Form
+          placeholder="MM"
+          value={form.month}
+          onChange={handleInputChange("month")}
+        />
+        <Form
+          placeholder="DD"
+          value={form.day}
+          onChange={handleInputChange("day")}
+        />
         <SubmitButton onPress={handleSubmit} />
-        </View>
-      </KeyboardAwareScrollView>
+      </View>
+    </KeyboardAwareScrollView>
   );
 }
 
