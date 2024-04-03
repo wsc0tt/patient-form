@@ -19,6 +19,7 @@ const Form = ({ error, onFocus = () => {}, ...props }) => {
         style={[styles.input, { borderColor: isFocused ? "blue" : "white" }]}
         cursorColor="blue"
         value={props.value}
+        maxLength ={props.maxLength}
       />
     </View>
   );

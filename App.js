@@ -77,16 +77,19 @@ export default function App() {
           placeholder="YYYY"
           value={form.year}
           onChange={handleInputChange("year")}
+          maxLength={4}
         />
         <Form
           placeholder="MM"
           value={form.month}
           onChange={handleInputChange("month")}
+          maxLength={2}
         />
         <Form
           placeholder="DD"
           value={form.day}
           onChange={handleInputChange("day")}
+          maxLength={2}
         />
         <SubmitButton onPress={handleSubmit} />
       </View>
